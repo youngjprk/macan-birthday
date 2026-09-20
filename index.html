@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Untuk Macannn ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--pink:#ff6f9f;--rose:#ff477e;--cream:#fff8fb;--ink:#52283b}
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(circle at top,#ffdbe8,#fff8fb 55%,#ffeef5);color:var(--ink);font-family:Poppins,sans-serif;overflow-x:hidden}
+    .screen{min-height:100svh;display:none;align-items:center;justify-content:center;padding:24px;text-align:center;position:relative}
+    .screen.active{display:flex;animation:fade .8s ease}
+    .card{width:min(680px,100%);padding:38px 25px;border:1px solid #ffffffaa;background:#ffffffa8;backdrop-filter:blur(12px);border-radius:32px;box-shadow:0 20px 70px #c95c8730}
+    .eyebrow{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#ad5575}
+    h1,h2{font-family:"DM Serif Display",serif;font-weight:400;line-height:1.05}
+    h1{font-size:clamp(54px,12vw,100px);margin:18px 0;color:#d9346c}
+    h2{font-size:clamp(36px,8vw,62px);margin:14px 0}
+    p{line-height:1.9;font-size:14px}
+    button{border:0;border-radius:999px;background:linear-gradient(135deg,var(--rose),#ff9abb);color:white;padding:14px 24px;font:600 13px Poppins;cursor:pointer;box-shadow:0 10px 24px #ff477e35;margin:8px;transition:.2s}
+    button:hover{transform:translateY(-2px)}
+    button.secondary{background:white;color:var(--rose);border:1px solid #ff9abb}
+    .small{font-size:12px;color:#a66b81}
+    .heart{position:fixed;bottom:-30px;font-size:22px;animation:float 8s linear infinite;opacity:.65;pointer-events:none}
+    .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}
+    .photo{height:145px;border-radius:20px;background:linear-gradient(145deg,#ffc2d7,#fff);display:flex;align-items:center;justify-content:center;font-size:35px;border:2px solid white}
+    .letter{text-align:left;background:#fffdfd;border-radius:22px;padding:25px;box-shadow:0 8px 30px #8c38521a}
+    .letter p{font-size:14px}
+    .countdown{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:25px 0}
+    .time{background:#fff;border-radius:18px;padding:13px 15px;min-width:75px}
+    .time strong{display:block;font-size:25px;color:var(--rose)}
+    .time span{font-size:10px;color:#a66b81}
+    .progress{height:8px;background:#ffe0ea;border-radius:99px;overflow:hidden;margin:22px 0}
+    .progress>div{height:100%;width:0;background:linear-gradient(90deg,#ff477e,#ffb0c8);transition:width .5s}
+    .hidden{display:none}
+    .quiz-option{display:block;width:100%;margin:10px 0;background:#fff;color:var(--ink);border:1px solid #ffd0df;box-shadow:none}
+    #confetti{position:fixed;inset:0;pointer-events:none;z-index:20}
+    @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    @keyframes float{to{transform:translateY(-110vh) rotate(360deg);opacity:0}}
+    @media(max-width:500px){.card{padding:28px 18px}.photo{height:95px}.letter{padding:18px}}
+  </style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+
+<section class="screen active" id="s1">
+  <div class="card">
+    <div class="eyebrow">A little surprise for</div>
+    <h1>Macannn ♡</h1>
+    <p>Ada sesuatu yang Ecaaa siapkan khusus buat kamu...</p>
+    <button onclick="go(2)">Buka kejutan ✨</button>
+    <p class="small">Psst... jangan buru-buru ditutup ya.</p>
+  </div>
+</section>
+
+<section class="screen" id="s2">
+  <div class="card">
+    <div class="eyebrow">Before we begin</div>
+    <h2>Jawab satu pertanyaan dulu 💗</h2>
+    <p>Siapa orang yang paling ingin Ecaaa bahagiakan hari ini?</p>
+    <button onclick="go(3)">Macannn, dong! 🥹</button>
+    <button class="secondary" onclick="go(3)">Aku sendiri? 😌</button>
+  </div>
+</section>
+
+<section class="screen" id="s3">
+  <div class="card">
+    <div class="eyebrow">A tiny countdown</div>
+    <h2>Menuju hari spesialmu</h2>
+    <p class="small">Ubah tanggal ulang tahun di file JavaScript jika diperlukan.</p>
+    <div class="countdown" id="countdown"></div>
+    <button onclick="go(4)">Lanjut, sayang ♡</button>
+  </div>
+</section>
+
+<section class="screen" id="s4">
+  <div class="card">
+    <div class="eyebrow">Our little memories</div>
+    <h2>Untuk Macannn</h2>
+    <p>Bagian ini bisa kamu isi dengan foto kalian. Untuk sekarang, anggap ini sebagai tempat kosong yang menunggu kenangan kalian.</p>
+    <div class="photo-grid">
+      <div class="photo">🌷</div><div class="photo">♡</div><div class="photo">🧸</div>
+    </div>
+    <button onclick="go(5)">Ada surat buat kamu 💌</button>
+  </div>
+</section>
+
+<section class="screen" id="s5">
+  <div class="card">
+    <div class="eyebrow">Open when you're ready</div>
+    <h2>Dear Macannn,</h2>
+    <div class="letter">
+      <p>Selamat ulang tahun, sayangku. ♡</p>
+      <p>Hari ini adalah hari yang spesial karena seseorang yang sangat berarti buat Ecaaa sedang bertambah usia. Ecaaa berharap kamu selalu dikelilingi hal-hal baik, orang-orang yang tulus, dan alasan-alasan kecil untuk tersenyum setiap hari.</p>
+      <p>Terima kasih sudah hadir, terima kasih untuk waktu, perhatian, tawa, dan semua momen yang mungkin terlihat sederhana tetapi selalu punya tempat tersendiri di hati Ecaaa. Kalau suatu hari kamu merasa lelah, semoga kamu ingat bahwa kamu tidak harus menghadapi semuanya sendirian.</p>
+      <p>Ecaaa tidak bisa menjanjikan bahwa setiap hari akan selalu mudah. Tapi Ecaaa ingin terus belajar untuk memahami kamu, mendengarkan kamu, dan menghargai setiap bagian dari diri kamu. Semoga semua impianmu perlahan menemukan jalannya, semoga langkahmu selalu diberi kekuatan, dan semoga kamu tidak pernah lupa betapa berharganya dirimu.</p>
+      <p>Selamat bertumbuh, selamat menjadi versi terbaik dari dirimu, dan selamat menikmati hari spesialmu. Jangan lupa bahagia, ya. Karena kebahagiaanmu juga berarti banyak buat Ecaaa.</p>
+      <p>With all my love,<br><b>Ecaaa ♡</b></p>
+    </div>
+    <button onclick="go(6);celebrate()">Terakhir... ada kejutan! 🎉</button>
+  </div>
+</section>
+
+<section class="screen" id="s6">
+  <div class="card">
+    <div class="eyebrow">The final surprise</div>
+    <h1>Happy Birthday!</h1>
+    <h2>Macannn ♡</h2>
+    <p>Semoga hari ini menjadi awal dari banyak hal indah yang akan datang. Ecaaa sayang kamu! 💗</p>
+    <button onclick="playMusic()">Putar musik 🎶</button>
+    <button class="secondary" onclick="spawnHearts()">Banjiri hati 💕</button>
+    <p class="small">Kamu bisa menambahkan file musik sendiri bernama <b>music.mp3</b> di folder website.</p>
+    <audio id="music" loop src="music.mp3"></audio>
+  </div>
+</section>
+
+<script>
+  const birthday = "2026-12-31T00:00:00"; // GANTI sesuai tanggal ulang tahun Macannn
+  let current=1;
+  function go(n){
+    document.getElementById("s"+current).classList.remove("active");
+    current=n;
+    document.getElementById("s"+current).classList.add("active");
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function updateCountdown(){
+    const diff=new Date(birthday)-new Date();
+    const box=document.getElementById("countdown");
+    if(diff<=0){box.innerHTML="<div class='time'><strong>🎂</strong><span>HARI INI!</span></div>";return}
+    const vals=[Math.floor(diff/86400000),Math.floor(diff/3600000)%24,Math.floor(diff/60000)%60,Math.floor(diff/1000)%60];
+    const labels=["Hari","Jam","Menit","Detik"];
+    box.innerHTML=vals.map((v,i)=>`<div class="time"><strong>${v}</strong><span>${labels[i]}</span></div>`).join("");
+  }
+  setInterval(updateCountdown,1000);updateCountdown();
+  function playMusic(){
+    const m=document.getElementById("music");
+    m.play().catch(()=>alert("Tambahkan file music.mp3 ke folder website terlebih dahulu."));
+  }
+  function spawnHearts(){
+    for(let i=0;i<24;i++){
+      const h=document.createElement("div");h.className="heart";h.textContent=["♡","💗","💕","💖"][Math.floor(Math.random()*4)];
+      h.style.left=Math.random()*100+"vw";h.style.animationDuration=(4+Math.random()*5)+"s";
+      document.body.appendChild(h);setTimeout(()=>h.remove(),9000);
+    }
+  }
+  function celebrate(){
+    const c=document.getElementById("confetti"),ctx=c.getContext("2d");
+    c.width=innerWidth;c.height=innerHeight;
+    const pieces=Array.from({length:180},()=>({x:innerWidth/2,y:innerHeight/2,vx:(Math.random()-.5)*12,vy:(Math.random()-.8)*12,s:Math.random()*7+3,r:Math.random()*6}));
+    let frame=0;
+    function draw(){
+      ctx.clearRect(0,0,c.width,c.height);
+      pieces.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.18;p.r+=.1;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=["#ff477e","#ffc1d6","#ff9fbd","#d9346c"][Math.floor(Math.random()*4)];ctx.fillRect(0,0,p.s,p.s*1.8);ctx.restore()});
+      if(frame++<180)requestAnimationFrame(draw);else ctx.clearRect(0,0,c.width,c.height);
+    }draw();spawnHearts();
+  }
+  spawnHearts();
+</script>
+</body>
+</html>
