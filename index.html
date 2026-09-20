@@ -59,8 +59,10 @@
     <div class="eyebrow">Before we begin</div>
     <h2>Jawab satu pertanyaan dulu 💗</h2>
     <p>Siapa orang yang paling ingin Ecaaa bahagiakan hari ini?</p>
-    <button onclick="go(3)">Macannn, dong! 🥹</button>
-    <button class="secondary" onclick="go(3)">Aku sendiri? 😌</button>
+    <button onclick="go(3)">Macannn, dongg! ♡</button>
+    <button class="secondary" onclick="wrongAnswer()">
+      Aku sendiri? 😌
+    </button>
   </div>
 </section>
 
@@ -123,6 +125,9 @@
     current=n;
     document.getElementById("s"+current).classList.add("active");
     window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function wrongAnswer() {
+    alert("Eits! Jawabannya harus Macannn, dong! 🥹💗");
   }
   function updateCountdown(){
     const diff=new Date(birthday)-new Date();
