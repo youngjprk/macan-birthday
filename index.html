@@ -187,84 +187,64 @@
   // ========================================
 
   function updateCountdown() {
-
-    const now = new Date();
-    const target = new Date(birthday);
-
-    const diff = target - now;
-
+  
+    const diff = new Date(birthday) - new Date();
+  
     const box = document.getElementById("countdown");
-
-    // Jika sudah mencapai waktu ulang tahun
-    if (diff <= 0) {
-
-      box.innerHTML = `
-        <div class="time">
-          <strong>🎂</strong>
-          <span>HARI INI!</span>
-        </div>
-      `;
-
-      return;
-    }
-
-    const days = Math.floor(diff / 86400000);
-
-    const hours = Math.floor(diff / 3600000) % 24;
-
-    const minutes = Math.floor(diff / 60000) % 60;
-
-    const seconds = Math.floor(diff / 1000) % 60;
-
+  
+    const remaining = Math.max(0, diff);
+  
+    const days = Math.floor(remaining / 86400000);
+  
+    const hours = Math.floor(remaining / 3600000) % 24;
+  
+    const minutes = Math.floor(remaining / 60000) % 60;
+  
+    const seconds = Math.floor(remaining / 1000) % 60;
+  
     const vals = [
       days,
       hours,
       minutes,
       seconds
     ];
-
+  
     const labels = [
       "Hari",
       "Jam",
       "Menit",
       "Detik"
     ];
-
+  
     box.innerHTML = vals.map((v, i) => `
       <div class="time">
         <strong>${v}</strong>
         <span>${labels[i]}</span>
       </div>
     `).join("");
-
+  
   }
-
 
   // ========================================
   // CEK WAKTU ULANG TAHUN OTOMATIS
   // ========================================
 
   function checkBirthday() {
-
+  
     const now = new Date();
-
+  
     const target = new Date(birthday);
-
+  
     updateCountdown();
-
-    // Saat waktu sudah mencapai ulang tahun
+  
     if (now >= target && !birthdayCelebrated) {
-
+  
       birthdayCelebrated = true;
-
-      // Pindah otomatis ke halaman terakhir
-      go(6);
-
-      // Jalankan confetti dan animasi hati
+  
       celebrate();
-
+  
     }
-
+  
   }
 
 
