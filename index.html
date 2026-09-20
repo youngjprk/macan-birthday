@@ -49,7 +49,7 @@
     <div class="eyebrow">A little surprise for</div>
     <h1>Macannn ♡</h1>
     <p>Ada sesuatu yang Ecaaa siapkan khusus buat kamu...</p>
-    <button onclick="go(2)">Buka kejutan ✨</button>
+    <button onclick="startSurprise()">Buka kejutan ✨</button>
     <p class="small">Psst... jangan buru-buru ditutup ya.</p>
   </div>
 </section>
@@ -70,7 +70,7 @@
   <div class="card">
     <div class="eyebrow">A tiny countdown</div>
     <h2>Menuju hari spesialmu</h2>
-    <p class="small">Ubah tanggal ulang tahun di file JavaScript jika diperlukan.</p>
+    <p class="small">Udah ga sabarrr niii</p>
     <div class="countdown" id="countdown"></div>
     <button onclick="go(4)">Lanjut, sayang ♡</button>
   </div>
@@ -80,10 +80,20 @@
   <div class="card">
     <div class="eyebrow">Our little memories</div>
     <h2>Untuk Macannn</h2>
-    <p>Bagian ini bisa kamu isi dengan foto kalian. Untuk sekarang, anggap ini sebagai tempat kosong yang menunggu kenangan kalian.</p>
-    <div class="photo-grid">
-      <div class="photo">🌷</div><div class="photo">♡</div><div class="photo">🧸</div>
+    <p>Hmmm gada pap nya lagii</p>
+  <div class="photo-grid">
+    <div class="photo">
+      <img src="foto1.jpg">
     </div>
+  
+    <div class="photo">
+      <img src="foto2.jpg">
+    </div>
+  
+    <div class="photo">
+      <img src="foto3.jpg">
+    </div>
+  </div>
     <button onclick="go(5)">Ada surat buat kamu 💌</button>
   </div>
 </section>
@@ -94,10 +104,10 @@
     <h2>Dear Macannn,</h2>
     <div class="letter">
       <p>Selamat ulang tahun, sayangku. ♡</p>
-      <p>Hari ini adalah hari yang spesial karena seseorang yang sangat berarti buat Ecaaa sedang bertambah usia. Ecaaa berharap kamu selalu dikelilingi hal-hal baik, orang-orang yang tulus, dan alasan-alasan kecil untuk tersenyum setiap hari.</p>
-      <p>Terima kasih sudah hadir, terima kasih untuk waktu, perhatian, tawa, dan semua momen yang mungkin terlihat sederhana tetapi selalu punya tempat tersendiri di hati Ecaaa. Kalau suatu hari kamu merasa lelah, semoga kamu ingat bahwa kamu tidak harus menghadapi semuanya sendirian.</p>
-      <p>Ecaaa tidak bisa menjanjikan bahwa setiap hari akan selalu mudah. Tapi Ecaaa ingin terus belajar untuk memahami kamu, mendengarkan kamu, dan menghargai setiap bagian dari diri kamu. Semoga semua impianmu perlahan menemukan jalannya, semoga langkahmu selalu diberi kekuatan, dan semoga kamu tidak pernah lupa betapa berharganya dirimu.</p>
-      <p>Selamat bertumbuh, selamat menjadi versi terbaik dari dirimu, dan selamat menikmati hari spesialmu. Jangan lupa bahagia, ya. Karena kebahagiaanmu juga berarti banyak buat Ecaaa.</p>
+      <p>Hari ini adalah hari yang spesial karena seseorang yang sangat berarti buat Ecaaa bertambah usia. Aku harap kamu selalu dikelilingi hal-hal baik, orang-orang yang tulus, dan alasan-alasan kecil untuk tersenyum setiap hari.</p>
+      <p>Terima kasih sudah hadir sayangg, terima kasih untuk waktu, perhatian, tawa, dan semua momen yang mungkin terlihat sederhana tapi selalu punya tempat tersendiri di hati Acuu. Kalau suatu hari kamu merasa lelah, semoga kamu ingat kalo kamu nda harus menghadapi semuanya sendirian.</p>
+      <p>Aku nda bisa menjanjikan bahwa setiap hari akan selalu mudah. Tapi Acuu mau terus belajar buat memahami kamu, dengerin kamu, dan menghargai setiap bagian dari diri kamu. Semoga semua impianmu perlahan menemukan jalannya, semoga langkahmu selalu diberi kekuatan, dan semoga kamu tidak pernah lupa betapa berharganya dirimu.</p>
+      <p>Selamat bertumbuh, selamat menjadi versi terbaik dari dirimu, dan selamat menikmati hari spesialmu. Jangan lupa bahagia, ya sayanggggg. Karena kebahagiaanmu juga berarti banyak buat Acuuuu 💗.</p>
       <p>With all my love,<br><b>Ecaaa ♡</b></p>
     </div>
     <button onclick="go(6);celebrate()">Terakhir... ada kejutan! 🎉</button>
@@ -109,17 +119,26 @@
     <div class="eyebrow">The final surprise</div>
     <h1>Happy Birthday!</h1>
     <h2>Macannn ♡</h2>
-    <p>Semoga hari ini menjadi awal dari banyak hal indah yang akan datang. Ecaaa sayang kamu! 💗</p>
-    <button onclick="playMusic()">Putar musik 🎶</button>
-    <button class="secondary" onclick="spawnHearts()">Banjiri hati 💕</button>
-    <p class="small">Kamu bisa menambahkan file musik sendiri bernama <b>music.mp3</b> di folder website.</p>
+    <p>Semoga hari ini menjadi awal dari banyak hal indah yang akan datang. Acuu sayang kamu! 💗</p>
+    <button class="secondary" onclick="spawnHearts()">Spam love 💕</button>
     <audio id="music" loop src="music.mp3"></audio>
   </div>
 </section>
 
 <script>
-  const birthday = "2026-12-31T00:00:00"; // GANTI sesuai tanggal ulang tahun Macannn
+  const birthday = "2026-09-21T00:00:00"; // GANTI sesuai tanggal ulang tahun Macannn
   let current=1;
+  function startSurprise() {
+    const music = document.getElementById("music");
+  
+    music.volume = 0.5;
+  
+    music.play().catch(error => {
+      console.log("Musik belum dapat diputar:", error);
+    });
+  
+    go(2);
+  }
   function go(n){
     document.getElementById("s"+current).classList.remove("active");
     current=n;
@@ -127,7 +146,7 @@
     window.scrollTo({top:0,behavior:"smooth"});
   }
   function wrongAnswer() {
-    alert("Eits! Jawabannya harus Macannn, dong! 🥹💗");
+    alert("Eits! Jawabannya harus Macannn, dong! 💗");
   }
   function updateCountdown(){
     const diff=new Date(birthday)-new Date();
