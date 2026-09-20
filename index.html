@@ -126,61 +126,315 @@
   </div>
 </section>
 
+
 <script>
-  const birthday = "2026-09-21T00:00:00"; // GANTI sesuai tanggal ulang tahun Macannn
-  let current=1;
+  // ========================================
+  // PENGATURAN ULANG TAHUN MACANNN
+  // ========================================
+
+  const birthday = "2026-09-21T00:00:00";
+
+  let current = 1;
+  let birthdayCelebrated = false;
+
+
+  // ========================================
+  // MUSIK DIMULAI SAAT TOMBOL PEMBUKA DIKLIK
+  // ========================================
+
   function startSurprise() {
     const music = document.getElementById("music");
-  
+
     music.volume = 0.5;
-  
+
     music.play().catch(error => {
       console.log("Musik belum dapat diputar:", error);
     });
-  
+
     go(2);
   }
-  function go(n){
-    document.getElementById("s"+current).classList.remove("active");
-    current=n;
-    document.getElementById("s"+current).classList.add("active");
-    window.scrollTo({top:0,behavior:"smooth"});
+
+
+  // ========================================
+  // PINDAH HALAMAN
+  // ========================================
+
+  function go(n) {
+    document.getElementById("s" + current).classList.remove("active");
+
+    current = n;
+
+    document.getElementById("s" + current).classList.add("active");
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   }
+
+
+  // ========================================
+  // JAWABAN SALAH
+  // ========================================
+
   function wrongAnswer() {
     alert("Eits! Jawabannya harus Macannn, dong! 💗");
   }
-  function updateCountdown(){
-    const diff=new Date(birthday)-new Date();
-    const box=document.getElementById("countdown");
-    if(diff<=0){box.innerHTML="<div class='time'><strong>🎂</strong><span>HARI INI!</span></div>";return}
-    const vals=[Math.floor(diff/86400000),Math.floor(diff/3600000)%24,Math.floor(diff/60000)%60,Math.floor(diff/1000)%60];
-    const labels=["Hari","Jam","Menit","Detik"];
-    box.innerHTML=vals.map((v,i)=>`<div class="time"><strong>${v}</strong><span>${labels[i]}</span></div>`).join("");
-  }
-  setInterval(updateCountdown,1000);updateCountdown();
-  function playMusic(){
-    const m=document.getElementById("music");
-    m.play().catch(()=>alert("Tambahkan file music.mp3 ke folder website terlebih dahulu."));
-  }
-  function spawnHearts(){
-    for(let i=0;i<24;i++){
-      const h=document.createElement("div");h.className="heart";h.textContent=["♡","💗","💕","💖"][Math.floor(Math.random()*4)];
-      h.style.left=Math.random()*100+"vw";h.style.animationDuration=(4+Math.random()*5)+"s";
-      document.body.appendChild(h);setTimeout(()=>h.remove(),9000);
+
+
+  // ========================================
+  // COUNTDOWN
+  // ========================================
+
+  function updateCountdown() {
+
+    const now = new Date();
+    const target = new Date(birthday);
+
+    const diff = target - now;
+
+    const box = document.getElementById("countdown");
+
+    // Jika sudah mencapai waktu ulang tahun
+    if (diff <= 0) {
+
+      box.innerHTML = `
+        <div class="time">
+          <strong>🎂</strong>
+          <span>HARI INI!</span>
+        </div>
+      `;
+
+      return;
     }
+
+    const days = Math.floor(diff / 86400000);
+
+    const hours = Math.floor(diff / 3600000) % 24;
+
+    const minutes = Math.floor(diff / 60000) % 60;
+
+    const seconds = Math.floor(diff / 1000) % 60;
+
+    const vals = [
+      days,
+      hours,
+      minutes,
+      seconds
+    ];
+
+    const labels = [
+      "Hari",
+      "Jam",
+      "Menit",
+      "Detik"
+    ];
+
+    box.innerHTML = vals.map((v, i) => `
+      <div class="time">
+        <strong>${v}</strong>
+        <span>${labels[i]}</span>
+      </div>
+    `).join("");
+
   }
-  function celebrate(){
-    const c=document.getElementById("confetti"),ctx=c.getContext("2d");
-    c.width=innerWidth;c.height=innerHeight;
-    const pieces=Array.from({length:180},()=>({x:innerWidth/2,y:innerHeight/2,vx:(Math.random()-.5)*12,vy:(Math.random()-.8)*12,s:Math.random()*7+3,r:Math.random()*6}));
-    let frame=0;
-    function draw(){
-      ctx.clearRect(0,0,c.width,c.height);
-      pieces.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.18;p.r+=.1;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=["#ff477e","#ffc1d6","#ff9fbd","#d9346c"][Math.floor(Math.random()*4)];ctx.fillRect(0,0,p.s,p.s*1.8);ctx.restore()});
-      if(frame++<180)requestAnimationFrame(draw);else ctx.clearRect(0,0,c.width,c.height);
-    }draw();spawnHearts();
+
+
+  // ========================================
+  // CEK WAKTU ULANG TAHUN OTOMATIS
+  // ========================================
+
+  function checkBirthday() {
+
+    const now = new Date();
+
+    const target = new Date(birthday);
+
+    updateCountdown();
+
+    // Saat waktu sudah mencapai ulang tahun
+    if (now >= target && !birthdayCelebrated) {
+
+      birthdayCelebrated = true;
+
+      // Pindah otomatis ke halaman terakhir
+      go(6);
+
+      // Jalankan confetti dan animasi hati
+      celebrate();
+
+    }
+
   }
+
+
+  // ========================================
+  // CEK SETIAP 1 DETIK
+  // ========================================
+
+  setInterval(checkBirthday, 1000);
+
+  checkBirthday();
+
+
+  // ========================================
+  // PEMUTAR MUSIK
+  // ========================================
+
+  function playMusic() {
+
+    const music = document.getElementById("music");
+
+    music.play().catch(() => {
+
+      alert("Tambahkan file music.mp3 ke folder website terlebih dahulu.");
+
+    });
+
+  }
+
+
+  // ========================================
+  // ANIMASI HATI
+  // ========================================
+
+  function spawnHearts() {
+
+    for (let i = 0; i < 24; i++) {
+
+      const h = document.createElement("div");
+
+      h.className = "heart";
+
+      h.textContent = [
+        "♡",
+        "💗",
+        "💕",
+        "💖"
+      ][Math.floor(Math.random() * 4)];
+
+      h.style.left = Math.random() * 100 + "vw";
+
+      h.style.animationDuration =
+        (4 + Math.random() * 5) + "s";
+
+      document.body.appendChild(h);
+
+      setTimeout(() => h.remove(), 9000);
+
+    }
+
+  }
+
+
+  // ========================================
+  // CONFETTI ULANG TAHUN
+  // ========================================
+
+  function celebrate() {
+
+    const c = document.getElementById("confetti");
+
+    const ctx = c.getContext("2d");
+
+    c.width = window.innerWidth;
+
+    c.height = window.innerHeight;
+
+    const pieces = Array.from(
+      { length: 180 },
+      () => ({
+
+        x: window.innerWidth / 2,
+
+        y: window.innerHeight / 2,
+
+        vx: (Math.random() - 0.5) * 12,
+
+        vy: (Math.random() - 0.8) * 12,
+
+        s: Math.random() * 7 + 3,
+
+        r: Math.random() * 6
+
+      })
+    );
+
+    let frame = 0;
+
+    function draw() {
+
+      ctx.clearRect(
+        0,
+        0,
+        c.width,
+        c.height
+      );
+
+      pieces.forEach(p => {
+
+        p.x += p.vx;
+
+        p.y += p.vy;
+
+        p.vy += 0.18;
+
+        p.r += 0.1;
+
+        ctx.save();
+
+        ctx.translate(p.x, p.y);
+
+        ctx.rotate(p.r);
+
+        ctx.fillStyle = [
+          "#ff477e",
+          "#ffc1d6",
+          "#ff9fbd",
+          "#d9346c"
+        ][Math.floor(Math.random() * 4)];
+
+        ctx.fillRect(
+          0,
+          0,
+          p.s,
+          p.s * 1.8
+        );
+
+        ctx.restore();
+
+      });
+
+      if (frame++ < 180) {
+
+        requestAnimationFrame(draw);
+
+      } else {
+
+        ctx.clearRect(
+          0,
+          0,
+          c.width,
+          c.height
+        );
+
+      }
+
+    }
+
+    draw();
+
+    spawnHearts();
+
+  }
+
+
+  // ========================================
+  // ANIMASI HATI SAAT WEBSITE DIBUKA
+  // ========================================
+
   spawnHearts();
+
 </script>
 </body>
 </html>
